@@ -24,6 +24,9 @@
     BOOL isDeleted;
 
     NSString *filename;
+
+    long duration;
+    NSDate* timeTaken;
 }
 
 - (id)initWithDictionary:(NSDictionary*)dict;
@@ -43,5 +46,8 @@
 @property (nonatomic, readonly) NSString* rev;
 @property (nonatomic, readonly) BOOL isDeleted;
 @property (nonatomic, readonly) NSString* filename;
+
+@property (nonatomic, readonly) long duration; // milliseconds
+@property (nonatomic, readonly) NSDate* timeTaken;
 
 @end

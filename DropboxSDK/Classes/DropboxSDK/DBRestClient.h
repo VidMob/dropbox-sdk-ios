@@ -42,6 +42,9 @@
 /* This will load the metadata of a file at a given rev */
 - (void)loadMetadata:(NSString *)path atRev:(NSString *)rev;
 
+/* If true, each file will include a photo_info dictionary for photos and a video_info dictionary for videos with additional media info. If the data isn't available yet, the string pending will be returned instead of a dictionary. */
+- (void)loadMetadata:(NSString *)path includeMediaInfo:(BOOL)includeMediaInfo;
+
 /* Loads a list of files (represented as DBDeltaEntry objects) that have changed since the cursor was generated */
 - (void)loadDelta:(NSString *)cursor;
 

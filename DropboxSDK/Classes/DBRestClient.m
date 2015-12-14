@@ -158,6 +158,15 @@
     [self loadMetadata:path withParams:params];
 }
 
+- (void)loadMetadata:(NSString *)path includeMediaInfo:(BOOL)includeMediaInfo {
+    NSDictionary *params = nil;
+    if (includeMediaInfo) {
+        params = [NSDictionary dictionaryWithObject:@"true" forKey:@"include_media_info"];
+    }
+
+    [self loadMetadata:path withParams:params];
+}
+
 - (void)requestDidLoadMetadata:(DBRequest*)request
 {
     if (request.statusCode == 304) {

@@ -64,6 +64,16 @@
         rev = [[dict objectForKey:@"rev"] retain];
         revision = [[dict objectForKey:@"revision"] longLongValue];
         isDeleted = [[dict objectForKey:@"is_deleted"] boolValue];
+
+        if ([[dict objectForKey:@"video_info"] isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *videoInfo = [dict objectForKey:@"video_info"];
+            timeTaken = [[[DBMetadata dateFormatter] dateFromString:[videoInfo objectForKey:@"time_taken"]] retain];
+            duration = [[videoInfo objectForKey:@"duration"] longValue];
+        }
+        if ([[dict objectForKey:@"photo_info"] isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *photoInfo = [dict objectForKey:@"photo_info"];
+            timeTaken = [[[DBMetadata dateFormatter] dateFromString:[photoInfo objectForKey:@"time_taken"]] retain];
+        }
     }
     return self;
 }
@@ -79,6 +89,7 @@
     [icon release];
     [rev release];
     [filename release];
+    [timeTaken release];
     [super dealloc];
 }
 
@@ -96,6 +107,9 @@
 @synthesize rev;
 @synthesize revision;
 @synthesize isDeleted;
+
+@synthesize duration;
+@synthesize timeTaken;
 
 - (BOOL)isEqual:(id)object {
     if (object == self) return YES;
@@ -129,6 +143,9 @@
         rev = [[coder decodeObjectForKey:@"rev"] retain];
         revision = [coder decodeInt64ForKey:@"revision"];
         isDeleted = [coder decodeBoolForKey:@"isDeleted"];
+
+        duration = [coder decodeInt32ForKey:@"duration"];
+        timeTaken = [[coder decodeObjectForKey:@"timeTaken"] retain];
     }
     return self;
 }
@@ -148,6 +165,9 @@
     [coder encodeObject:rev forKey:@"rev"];
     [coder encodeInt64:revision forKey:@"revision"];
     [coder encodeBool:isDeleted forKey:@"isDeleted"];
+
+    [coder encodeInt32:duration forKey:@"duration"];
+    [coder encodeObject:timeTaken forKey:@"timeTaken"];
 }
 
 @end
