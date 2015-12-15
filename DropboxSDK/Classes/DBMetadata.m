@@ -67,14 +67,14 @@
 
         if ([[dict objectForKey:@"video_info"] isKindOfClass:[NSDictionary class]]) {
             NSDictionary *videoInfo = [dict objectForKey:@"video_info"];
-            if ([videoInfo objectForKey:@"time_taken"]) {
+            if ([[videoInfo objectForKey:@"time_taken"] isKindOfClass:[NSString class]]) {
                 timeTaken = [[[DBMetadata dateFormatter] dateFromString:[videoInfo objectForKey:@"time_taken"]] retain];
             }
             duration = [[videoInfo objectForKey:@"duration"] longValue];
         }
         if ([[dict objectForKey:@"photo_info"] isKindOfClass:[NSDictionary class]]) {
             NSDictionary *photoInfo = [dict objectForKey:@"photo_info"];
-            if ([photoInfo objectForKey:@"time_taken"]) {
+            if ([[photoInfo objectForKey:@"time_taken"] isKindOfClass:[NSString class]]) {
                 timeTaken = [[[DBMetadata dateFormatter] dateFromString:[photoInfo objectForKey:@"time_taken"]] retain];
             }
         }
