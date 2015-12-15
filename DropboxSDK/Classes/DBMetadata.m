@@ -70,7 +70,9 @@
             if ([[videoInfo objectForKey:@"time_taken"] isKindOfClass:[NSString class]]) {
                 timeTaken = [[[DBMetadata dateFormatter] dateFromString:[videoInfo objectForKey:@"time_taken"]] retain];
             }
-            duration = [[videoInfo objectForKey:@"duration"] longValue];
+            if ([[videoInfo objectForKey:@"duration"] isKindOfClass:[NSNumber class]]) {
+                duration = [[videoInfo objectForKey:@"duration"] longValue];
+            }
         }
         if ([[dict objectForKey:@"photo_info"] isKindOfClass:[NSDictionary class]]) {
             NSDictionary *photoInfo = [dict objectForKey:@"photo_info"];
